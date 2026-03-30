@@ -1,36 +1,38 @@
-
-import java.util.*;
+import java.util.Stack;
 
 class Solution {
     public int[] asteroidCollision(int[] asteroids) {
-        List<Integer> st = new ArrayList<>(); // Using list like a stack for easy conversion
+        Stack<Integer> st = new Stack<>();
 
-        for (int i = 0; i < asteroids.length; i++) {
-            if (asteroids[i] > 0) {
-                // If it's a positive asteroid, it moves Right. Just add it.
-                st.add(asteroids[i]);
-            } else {
-                // If it's a negative asteroid, it moves Left. Check for collisions.
-                // Collide while stack top is Positive and smaller than current asteroid
-                while (!st.isEmpty() && st.get(st.size() - 1) > 0 && st.get(st.size() - 1) < Math.abs(asteroids[i])) {
-                    st.remove(st.size() - 1);
-                }
+        for (int ast : asteroids) {
+            boolean destroyed = false;
 
-                // If they are of equal size, both get destroyed
-                if (!st.isEmpty() && st.get(st.size() - 1) == Math.abs(asteroids[i])) {
-                    st.remove(st.size() - 1);
+             while (!st.isEmpty() && st.peek() > 0 && ast < 0) {
+                
+                 if (Math.abs(st.peek()) < Math.abs(ast)) {
+                    st.pop();
+                    continue;  
                 } 
-                // If stack is empty or top is negative (moving away), add current
-                else if (st.isEmpty() || st.get(st.size() - 1) < 0) {
-                    st.add(asteroids[i]);
+                 else if (Math.abs(st.peek()) == Math.abs(ast)) {
+                    st.pop();
+                    destroyed = true;
+                    break;
+                } 
+                 else {
+                    destroyed = true;
+                    break;
                 }
+            }
+
+             if (!destroyed) {
+                st.push(ast);
             }
         }
 
-        // Convert List back to int array
+        // Convert stack back to array
         int[] result = new int[st.size()];
-        for (int i = 0; i < st.size(); i++) {
-            result[i] = st.get(i);
+        for (int i = st.size() - 1; i >= 0; i--) {
+            result[i] = st.pop();
         }
         return result;
     }
