@@ -11,45 +11,61 @@
  */
 // public class Solution {
 //     public ListNode detectCycle(ListNode head) {
-//         ListNode fast=head;
-//         ListNode slow=head;
+//        
+//  public class Solution {
+//     public ListNode detectCycle(ListNode head) {
+//         // Step 1: Pointers initialize karein
+//         ListNode slow = head;
+//         ListNode fast = head;
 
-//         int count=0;
-//         while(fast.next!=null && fast!=null){
-//             fast=fast.next.next;
-//             slow=slow.next;
-//             count++;
-//             if(fast.next==slow.next) return count;
+//         // Step 2: Cycle detect karein
+//         while (fast != null && fast.next != null) {
+//             slow = slow.next;         // 1 step aage
+//             fast = fast.next.next;    // 2 steps aage
+
+//             if (slow == fast) {       // Meeting point mil gaya
+//                 // Step 3: Cycle ka start node dhoondhein
+//                 ListNode entry = head; 
+//                 while (entry != slow) {
+//                     entry = entry.next;
+//                     slow = slow.next;
+//                 }
+//                 return entry;         // Jahan dono mile, wahi start node hai
+//             }
 //         }
-//         return false;
+
+//         return null; // Loop se bahar aaye matlab cycle nahi hai
 //     }
 // }
- public class Solution {
+
+
+
+public class Solution {
     public ListNode detectCycle(ListNode head) {
-        // Step 1: Pointers initialize karein
-        ListNode slow = head;
         ListNode fast = head;
-
-        // Step 2: Cycle detect karein
-        while (fast != null && fast.next != null) {
-            slow = slow.next;         // 1 step aage
-            fast = fast.next.next;    // 2 steps aage
-
-            if (slow == fast) {       // Meeting point mil gaya
-                // Step 3: Cycle ka start node dhoondhein
-                ListNode entry = head; 
-                while (entry != slow) {
-                    entry = entry.next;
-                    slow = slow.next;
-                }
-                return entry;         // Jahan dono mile, wahi start node hai
+        ListNode slow = head;
+         while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                break;
             }
         }
 
-        return null; // Loop se bahar aaye matlab cycle nahi hai
-    }
-}
+        
+        if (fast == null || fast.next == null) {
+            return null;
+        }
 
+         slow = head;
+        while (slow != fast) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+}
     // ListNode fast = head;
     // ListNode slow = head;
 
