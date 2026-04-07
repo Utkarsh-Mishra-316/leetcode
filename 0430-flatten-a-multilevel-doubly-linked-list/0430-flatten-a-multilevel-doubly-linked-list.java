@@ -11,36 +11,37 @@ class Node {
 class Solution {
     public Node flatten(Node head) {
         if (head == null) return head;
-        
-        // Pointer use karke traverse karenge
+
         Node curr = head;
-        
         while (curr != null) {
-            // Agar child milta hai
+            // Case 1: Child exists
             if (curr.child != null) {
-                // 1. Child list ka aakhri (tail) node dhoondo
-                Node childTail = curr.child;
-                while (childTail.next != null) {
-                    childTail = childTail.next;
+                // Step 1: Store the original next pointer
+                Node nextNode = curr.next;
+
+                // Step 2: Recursively flatten the child list
+                Node childHead = flatten(curr.child);
+
+                // Step 3: Connect curr to childHead
+                curr.next = childHead;
+                childHead.prev = curr;
+                curr.child = null; // Important cleanup
+
+                // Step 4: Find the tail of the flattened child list
+                Node temp = childHead;
+                while (temp.next != null) {
+                    temp = temp.next;
                 }
-                
-                // 2. Child tail ko curr.next se connect karo
-                childTail.next = curr.next;
-                if (curr.next != null) {
-                    curr.next.prev = childTail;
+
+                // Step 5: Connect tail to the original next node
+                temp.next = nextNode;
+                if (nextNode != null) {
+                    nextNode.prev = temp;
                 }
-                
-                // 3. Curr.next ko child se connect karo
-                curr.next = curr.child;
-                curr.child.prev = curr;
-                
-                // 4. Child pointer ko null karo (Flattening rule)
-                curr.child = null;
             }
-            // Aage badho
+            // Move to the next node
             curr = curr.next;
         }
-        
         return head;
     }
 }
