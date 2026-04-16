@@ -13,15 +13,16 @@ class Solution {
     public ListNode deleteDuplicates(ListNode head) {
 
 
-ListNode node=head;
-if(head==null ||head.next==null) return head;
-while(node.next!=null){
-    if(node.val==node.next.val){
-        node.next=node.next.next;
+ if(head==null ||head.next==null) return head;
+
+ListNode tail=head;
+while(tail.next!=null ){
+    if(tail.val == tail.next.val){
+        tail.next=tail.next.next;
     }
     else{
-        node=node.next;
-    }
+    tail=tail.next;}
 }
 return head;
 }}
+ 
