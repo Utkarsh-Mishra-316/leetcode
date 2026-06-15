@@ -13,27 +13,44 @@
  *     }
  * }
  */
+// class Solution {
+//     public boolean helper(TreeNode node,Integer low,Integer high){
+//  if(node==null) return true;
+//  if(low!=null && node.val<=low) return false;
+//  if(high!=null && node.val>=high) return false;
+//  boolean leftnode=helper(node.left,low,node.val);
+//   boolean rightnode=helper(node.right,node.val,high);
+//  return leftnode &&  rightnode;
+//     }
+//     public boolean isValidBST(TreeNode root) {
+         
+//         return helper(root,null,null);
+
+
+
+//     }
+// }
+
 class Solution {
-    public boolean helper(TreeNode node, Integer low, Integer high) {
-        // Base case: Null node hamesha valid hota hai
-        if (node == null) return true;
+TreeNode pre=null;
+public boolean isValidBST(TreeNode root) {
 
-        // Low boundary check: node.val <= low nahi hona chahiye
-        if (low != null && node.val <= low) return false;
-
-        // High boundary check: node.val >= high nahi hona chahiye
-        if (high != null && node.val >= high) return false;
-
-        // Left subtree ke liye: High boundary ab current node ki value hogi
-        // Right subtree ke liye: Low boundary ab current node ki value hogi
-        boolean leftnode = helper(node.left, low, node.val);
-        boolean rightnode = helper(node.right, node.val, high);
-
-        return leftnode && rightnode;
+    if(root==null){
+        return true;
     }
+ if(!isValidBST(root.left)){
+    return false;
+ }
+ if(pre!=null && pre.val>=root.val){
+    return false;
+ }
+ pre=root;
+ return isValidBST(root.right);
+}}
 
-    public boolean isValidBST(TreeNode root) {
-        // Initial call mein koi range nahi hoti (null, null)
-        return helper(root, null, null);
-    }
-}
+
+
+
+
+
+
