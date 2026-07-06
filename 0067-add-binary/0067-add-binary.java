@@ -18,7 +18,6 @@ class Solution {
             }
             ch[c--]=(char)((sum%2)+'0');
             carry=sum/2;
-            
             }
             if(c==0){
                 return new String(ch,1,ch.length-1);
