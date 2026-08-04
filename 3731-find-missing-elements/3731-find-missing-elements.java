@@ -15,7 +15,7 @@ ab.add(i);
             }
           
         }
-        if(ab.size()==0) return ab;
+         
         return ab;
     }
 }
