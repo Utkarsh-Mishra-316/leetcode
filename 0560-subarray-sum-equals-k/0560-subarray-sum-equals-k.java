@@ -1,19 +1,17 @@
-import java.util.HashMap;
-
 class Solution {
     public int subarraySum(int[] nums, int k) {
-     HashMap<Integer,Integer> map=new HashMap<>();
-     int  count=0;
-     int prefixsum=0;
-     map.put(0,1);
-     for(int i=0;i<nums.length;i++){
-        prefixsum+=nums[i];
-        int remainingsum=prefixsum-k;
-        if(map.containsKey(remainingsum)){
-            count+=map.get(remainingsum);
+        int count = 0;
+        
+        for (int start = 0; start < nums.length; start++) {
+            int currentSum = 0;
+            for (int end = start; end < nums.length; end++) {
+                currentSum += nums[end];
+                if (currentSum == k) {
+                    count++;
+                }
+            }
         }
-        map.put(prefixsum, map.getOrDefault(prefixsum, 0) + 1);
-     }
-     return count;
+        
+        return count;
     }
 }
