@@ -1,24 +1,27 @@
 class Solution {
     public int mostFrequentEven(int[] nums) {
-        int f[]=new int[100001];
-        int count=0;
-        int candidate=-1;
+        Arrays.sort(nums);
+        int cnt=0;
+        int ele=-1;
+        int bele=-1;
+        int max=0;
         for(int num:nums){
             if(num%2==0){
-                f[num]++;
-                if(f[num]>count){
-                 count=f[num];
-                 candidate=num;   
+
+                if(num==ele){
+                    cnt++;
                 }
-                else if(f[num]==count && candidate>num){
-                     
-                     candidate=num;
+                else{
+                    cnt=1;
+                    ele=num;
                 }
-               
+                if(max<cnt){
+                    max=cnt;
+                    bele=ele;
+                }
             }
-            
         }
-       
-        return candidate;
+        
+return bele;
     }
 }
