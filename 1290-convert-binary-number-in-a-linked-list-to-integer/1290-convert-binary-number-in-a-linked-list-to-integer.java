@@ -10,17 +10,13 @@
  */
 class Solution {
     public int getDecimalValue(ListNode head) {
-        int result = 0;
-        ListNode temp = head;
-        
-        while (temp != null) {
-            // Har step par result ko left shift (x2) karein aur naya bit add karein
-            result = (result * 2) + temp.val;
-            
-            // Pointer ko aage badhayein
-            temp = temp.next;
+        ListNode curr=new ListNode();
+        curr=head;
+        int ans=0;
+        while(curr!=null){
+ans=(ans*2)+curr.val;
+curr=curr.next;
         }
-        
-        return result;
+        return ans;
     }
 }
