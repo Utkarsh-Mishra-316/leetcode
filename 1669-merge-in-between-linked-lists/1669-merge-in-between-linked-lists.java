@@ -15,8 +15,8 @@ class Solution {
             aftera=aftera.next;
 
         }
-        ListNode beforeb=list1;
-        for(int i=0;i<b+1;i++){
+        ListNode beforeb=aftera;
+        for(int i=a;i<=b+1;i++){
             beforeb=beforeb.next;
         }
         ListNode temp=list2;
