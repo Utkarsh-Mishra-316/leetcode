@@ -10,10 +10,10 @@
  */
 class Solution {
     public ListNode partition(ListNode head, int x) {
-        ListNode smallhead=new ListNode(0);
-        ListNode bighead=new ListNode(0);
-        ListNode small=smallhead;
-        ListNode big=bighead;
+        ListNode bigl=new ListNode(0);
+        ListNode smalll=new ListNode(0);
+        ListNode small=smalll;
+        ListNode big=bigl;
         while(head!=null){
             if(head.val<x){
                 small.next=head;
@@ -25,8 +25,8 @@ class Solution {
             }
             head=head.next;
         }
+        small.next=bigl.next;
         big.next=null;
-        small.next=bighead.next;
-        return smallhead.next;
+        return smalll.next;
     }
 }
