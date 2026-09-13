@@ -1,13 +1,18 @@
 class Solution {
     public int generateKey(int num1, int num2, int num3) {
-      String s1=String.format("%04d",num1);
-      String s2=String.format("%04d",num2);
-      String s3=String.format("%04d",num3) ;
-      StringBuilder sb=new StringBuilder();
-      for(int i=0;i<4;i++){
-        char ch=(char)Math.min(s1.charAt(i),Math.min(s2.charAt(i),s3.charAt(i)));
-        sb.append(ch);
-      } 
-      return Integer.parseInt(sb.toString());
+        int key=0;
+        int place=1;
+        for(int i=0;i<4;i++){
+            int d1=num1%10;
+            int d2=num2%10;
+            int d3=num3%10;
+            int min=Math.min(d1,Math.min(d2,d3));
+            key+=min*place;
+            place*=10;
+             num1/=10;
+             num2/=10;
+             num3/=10;
+        }
+        return key;
     }
 }
