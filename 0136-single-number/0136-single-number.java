@@ -1,12 +1,14 @@
 class Solution {
     public int singleNumber(int[] nums) {
-        int xorResult = 0;
-        
-        // Saare elements ka continuously XOR nikalte jao
-        for (int num : nums) {
-            xorResult = xorResult ^ num; // Duplicates cancel each other out!
+        Set<Integer> set=new HashSet<>();
+        for(int i=0;i<nums.length;i++){
+            if(set.contains(nums[i])){
+            set.remove(nums[i]);}
+else{
+    set.add(nums[i]);
+}
         }
-        
-        return xorResult; // Sirf single number hi zinda bachega
+
+        return set.iterator().next();
     }
 }
