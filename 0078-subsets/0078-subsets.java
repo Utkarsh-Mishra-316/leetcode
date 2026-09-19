@@ -1,23 +1,15 @@
 class Solution {
-    static void subsequence(int index, List<Integer> ds,List<List<Integer>> ans,int n,int[] nums){
-  if (index == n) {
-    ans.add(new ArrayList<>(ds)); // 'ds' ki copy banakar add karein
-    return;
-}
-ds.add(nums[index]);
-subsequence(index+1,ds,ans,n,nums);
-ds.remove(ds.size()-1);
-subsequence(index+1,ds,ans,n,nums);
-    }
-
-
-
-
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> ans=new ArrayList<>();
-        List<Integer> ds = new ArrayList<>();
-        int n = nums.length;
- subsequence(0,ds,ans,n,nums);
- return ans;
+       List<List<Integer>> ans=new ArrayList<>();
+      backtrack(0,nums,ans,new ArrayList<>());
+      return ans; 
+    }
+    void backtrack(int index,int [] nums, List<List<Integer> > ans,List<Integer> curr){
+    ans.add(new ArrayList<> (curr));
+    for(int i=index;i<nums.length;i++){
+        curr.add(nums[i]);
+        backtrack(i+1,nums,ans,curr);
+        curr.remove(curr.size()-1);
+    }
     }
 }
