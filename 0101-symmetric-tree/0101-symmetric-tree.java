@@ -15,41 +15,18 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-        if(root==null) return true;
-        return ismirror(root.left,root.right);
+        return same(root.left ,root.right);
+    }
+    boolean same(TreeNode root,TreeNode root2){
+        if(root==null && root2==null){
+            return true;
         }
-        public boolean ismirror(TreeNode r1 ,TreeNode r2){
-            if(r1==null && r2==null ){return true;}
-            if(r1==null || r2==null) return false;
-         boolean current=(r1.val==r2.val);
-         boolean leftside=ismirror(r1.left,r2.right);
-         boolean rightside=ismirror(r1.right,r2.left);
-         return current && leftside && rightside ;
-        
+if(root==null|| root2==null){
+            return false;
         }
-        }
-//        Queue<TreeNode> queue=new LinkedList<>();
-//        queue.add(root.left);
-//        queue.add(root.right);
-//        while(!queue.isEmpty()){
-//         TreeNode left=queue.poll();
-        
-//         TreeNode right=queue.poll();
-//         if(left==null && right==null){
-//             continue;
-//         }
-//         if(left==null || right == null){
-//             return false;
-//         }
-//         if(left.val!=right.val){
-//             return false;
-//         }
-//         queue.add(left.left);
-//         queue.add(right.right);
-//         queue.add(left.right);
-//         queue.add(right.left);
-//        }        
-//  return true;
-
-//     }
-// }
+boolean curr=(root.val==root2.val);
+boolean leftt=same(root.left,root2.right);
+boolean rightt=same(root.right,root2.left);
+return curr&& leftt && rightt;
+    }
+}
