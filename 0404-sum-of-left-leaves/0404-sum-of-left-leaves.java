@@ -14,21 +14,33 @@
  * }
  */
 class Solution {
-     public int sums(TreeNode root){
- if(root==null){return 0;}
-        int sum=0;
-        if(root.left!=null && root.left.left==null && root.left.right==null ){
-            sum+=root.left.val;
-        }
-        else{
-            sum+=sums(root.left);
-        }
-   
-sum+=sums(root.right);
-return sum;
-     }
-  
     public int sumOfLeftLeaves(TreeNode root) {
-       return sums(root);
+        int sum=0;
+        if(root==null){
+            return sum;
+        }
+        Queue<TreeNode>queue=new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int cs=queue.size();
+            for(int i=0;i<cs;i++){
+                TreeNode curr=queue.poll();
+ 
+if(curr.left!=null){
+
+    if(curr.left.left==null && curr.left.right==null){
+         
+    sum+=curr.left.val;
+ 
+    }else{
+    queue.offer(curr.left);
+}}
+if(curr.right!=null){
+    queue.offer(curr.right);
+}
+
+            }
+        }
+        return sum;
     }
 }
