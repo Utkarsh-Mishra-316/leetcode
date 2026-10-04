@@ -14,31 +14,32 @@
  * }
  */
 class Solution {
-    public int countNodes (TreeNode root) {
-        int left=leftheight(root);
-        int right=rightheight(root);
-        if(left==right){
-            return (int) Math.pow(2, left) - 1;
-        }
-        return 1 + countNodes(root.left) + countNodes(root.right);
-    }
-    int leftheight(TreeNode root){
-        int height=0;
-        TreeNode leftNode = root;
-        while(leftNode!=null){
-            height++;
-            leftNode = leftNode.left;
-        }
-        return height;
-    }
+    public int countNodes(TreeNode root) {
+        if (root == null) return 0;
 
-     int rightheight(TreeNode root){
-        int height=0;
-        TreeNode rightNode = root;
-        while(rightNode!=null){
-            height++;
-             rightNode = rightNode.right;
-        }
+        int leftvalue=lefttree(root);
+        int rightvalue=righttree(root);
+        if(leftvalue==rightvalue){
+            return (1<<leftvalue)-1;
+            
+        }return 1+countNodes(root.left)+countNodes(root.right);}
+        int lefttree(TreeNode root){
+
+            int height=0;
+            while(root!=null){
+                height++;
+                root=root.left;
+            }
         return height;
     }
+     int righttree(TreeNode root){
+
+            int height=0;
+            while(root!=null){
+                height++;
+                root=root.right;
+            }
+                    return height;
+
+        }
 }
