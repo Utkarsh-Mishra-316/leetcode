@@ -1,26 +1,15 @@
 class Solution {
-    static int fab(int n){
-        if(n==0) return 0;
-        if(n==1) return 1;
-        return fab(n-1) +fab(n-2);
+    static int [] dp;
+
+    static int fibo(int n){
+        if(dp[n]!=0) return dp[n];
+        if(n<=1) return n;
+        int ans=fibo(n-1)+fibo(n-2);
+        dp[n]=ans;
+        return ans;
     }
     public int fib(int n) {
-
-       
-        // if(n==0){
-        //     return 0;
-        //  }
-        //  else if(n==1){
-        //     return 1;
-        //  }
-        //  int first=0;
-        //  int second=1;
-        //  for (int i=1;i<=n;i++){
-        //     int third=first+second;
-        //     first=second;
-        //     second=third;
-        //  }
-        //    return first;
-        return fab(n);
+        dp=new int [n+1];
+        return fibo(n);
     }
 }
