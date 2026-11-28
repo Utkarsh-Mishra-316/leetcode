@@ -1,31 +1,19 @@
 class Solution {
     public String mergeAlternately(String word1, String word2) {
-
-        StringBuilder sb = new StringBuilder();
-
-        int i = 0;
-        int j = 0;
-
-        // Alternate characters add karo
-        while (i < word1.length() && j < word2.length()) {
-            sb.append(word1.charAt(i));
-            sb.append(word2.charAt(j));
-            i++;
-            j++;
+        int a=0;
+        int b=0;
+        StringBuilder str=new StringBuilder();
+        for(int i=0;i<word1.length();i++){
+            str.append(word1.charAt(i));a++;
+            if(b<word2.length()){
+                str.append(word2.charAt(i));
+                b++;
+            }
         }
-
-        // Agar word1 me characters bache hain
-        while (i < word1.length()) {
-            sb.append(word1.charAt(i));
-            i++;
+        while(b<word2.length()){
+            str.append(word2.charAt(b));
+            b++;
         }
-
-        // Agar word2 me characters bache hain
-        while (j < word2.length()) {
-            sb.append(word2.charAt(j));
-            j++;
-        }
-
-        return sb.toString();
+        return str.toString();
     }
 }
